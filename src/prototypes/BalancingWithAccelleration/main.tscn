@@ -18,6 +18,7 @@ script = ExtResource("1_uj8yp")
 movement_speed = 400.0
 player = NodePath("Player")
 simulator_ball = NodePath("Subviewport/GlassSimulation/SimulatorBall")
+dash_cool_down = NodePath("DashCoolDown")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1969738181]
 scale = Vector2(44.59375, 34.3125)
@@ -90,4 +91,7 @@ shape = SubResource("CircleShape2D_quj70")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/SimulatorBall" unique_id=155183533]
 shape = SubResource("CircleShape2D_e61f2")
-debug_color = Color(0.7738306, 0.39939126, 0.51065356, 0.41960785)
+
+[node name="DashCoolDown" type="Timer" parent="." unique_id=535936403]
+
+[connection signal="timeout" from="DashCoolDown" to="." method="_on_dash_cool_down_timeout"]
