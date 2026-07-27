@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://6hhuwrg8e31v"]
+
+[ext_resource type="Script" uid="uid://mitsmrnhe7vo" path="res://src/prototypes/BalancingWithAccelleration/main.gd" id="1_uj8yp"]
+[ext_resource type="Texture2D" uid="uid://bp0amguw0k7hr" path="res://icon.svg" id="2_qhrr0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhrr0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vt83r"]
+viewport_path = NodePath("Subviewport")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_quj70"]
+radius = 159.12
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e61f2"]
+
+[node name="Main" type="Node2D" unique_id=1932576237 node_paths=PackedStringArray("player", "simulator_ball")]
+script = ExtResource("1_uj8yp")
+movement_speed = 400.0
+player = NodePath("Player")
+simulator_ball = NodePath("Subviewport/GlassSimulation/SimulatorBall")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1969738181]
+scale = Vector2(44.59375, 34.3125)
+texture = ExtResource("2_qhrr0")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=894154200]
+
+[node name="Icon" type="Sprite2D" parent="Player" unique_id=1283504213]
+texture = ExtResource("2_qhrr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1651640485]
+shape = SubResource("CircleShape2D_qhrr0")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1068785408]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="Player/Camera2D" unique_id=662018735]
+
+[node name="Control" type="Control" parent="Player/Camera2D/HUD" unique_id=1014954611]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Player/Camera2D/HUD/Control" unique_id=946479314]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -320.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Player/Camera2D/HUD/Control/Control" unique_id=2083536575]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_vt83r")
+expand_mode = 3
+
+[node name="Subviewport" type="SubViewport" parent="." unique_id=2028505767]
+
+[node name="GlassSimulation" type="Node2D" parent="Subviewport" unique_id=230860013]
+position = Vector2(256, 256)
+
+[node name="Camera2D" type="Camera2D" parent="Subviewport/GlassSimulation" unique_id=1455733254]
+
+[node name="AttractorField" type="Area2D" parent="Subviewport/GlassSimulation" unique_id=1765078996]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 490.0
+linear_damp_space_override = 1
+linear_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/AttractorField" unique_id=688290067]
+shape = SubResource("CircleShape2D_quj70")
+
+[node name="SimulatorBall" type="RigidBody2D" parent="Subviewport/GlassSimulation" unique_id=1217118841]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/SimulatorBall" unique_id=155183533]
+shape = SubResource("CircleShape2D_e61f2")
+debug_color = Color(0.7738306, 0.39939126, 0.51065356, 0.41960785)
