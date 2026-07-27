@@ -11,9 +11,15 @@ viewport_path = NodePath("Subviewport")
 [sub_resource type="CircleShape2D" id="CircleShape2D_quj70"]
 radius = 159.12
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3amak"]
+radius = 75.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgurt"]
+radius = 50.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_e61f2"]
 
-[node name="Main" type="Node2D" unique_id=1932576237 node_paths=PackedStringArray("player", "simulator_ball")]
+[node name="Main" type="Node2D" unique_id=1932576237 node_paths=PackedStringArray("player", "simulator_ball", "dash_cool_down")]
 script = ExtResource("1_uj8yp")
 movement_speed = 400.0
 player = NodePath("Player")
@@ -24,7 +30,7 @@ dash_cool_down = NodePath("DashCoolDown")
 scale = Vector2(44.59375, 34.3125)
 texture = ExtResource("2_qhrr0")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=894154200]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1685786573]
 
 [node name="Icon" type="Sprite2D" parent="Player" unique_id=1283504213]
 texture = ExtResource("2_qhrr0")
@@ -75,17 +81,42 @@ position = Vector2(256, 256)
 
 [node name="Camera2D" type="Camera2D" parent="Subviewport/GlassSimulation" unique_id=1455733254]
 
-[node name="AttractorField" type="Area2D" parent="Subviewport/GlassSimulation" unique_id=1765078996]
+[node name="OuterAttractorField" type="Area2D" parent="Subviewport/GlassSimulation" unique_id=1765078996]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = -50.0
+linear_damp_space_override = 3
+linear_damp = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/OuterAttractorField" unique_id=688290067]
+shape = SubResource("CircleShape2D_quj70")
+debug_color = Color(0.5758852, 0.5526909, 0.10234404, 0.41960785)
+
+[node name="MiddleAttractorField" type="Area2D" parent="Subviewport/GlassSimulation" unique_id=1356273916]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = -10.0
+linear_damp_space_override = 3
+linear_damp = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/MiddleAttractorField" unique_id=1267571351]
+shape = SubResource("CircleShape2D_3amak")
+debug_color = Color(0.796695, 0.4235507, 0.074847884, 0.41960785)
+
+[node name="InnerAttractorField" type="Area2D" parent="Subviewport/GlassSimulation" unique_id=1817337796]
 gravity_space_override = 3
 gravity_point = true
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 gravity = 490.0
-linear_damp_space_override = 1
-linear_damp = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/AttractorField" unique_id=688290067]
-shape = SubResource("CircleShape2D_quj70")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subviewport/GlassSimulation/InnerAttractorField" unique_id=1285892542]
+shape = SubResource("CircleShape2D_lgurt")
+debug_color = Color(0.8791756, 0.31444353, 0.34764168, 0.41960785)
 
 [node name="SimulatorBall" type="RigidBody2D" parent="Subviewport/GlassSimulation" unique_id=1217118841]
 
