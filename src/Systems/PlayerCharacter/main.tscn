@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dqh42ce2gyiok"]
+
+[ext_resource type="Script" uid="uid://cimfxolatyu70" path="res://src/Systems/PlayerCharacter/main.gd" id="1_fe37d"]
+[ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/compass-rose.png" id="1_qfcom"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fe37d"]
+radius = 21.095022
+
+[node name="Main" type="Node2D" unique_id=1500491793 node_paths=PackedStringArray("player_sprite", "player_body")]
+script = ExtResource("1_fe37d")
+player_sprite = NodePath("PlayerBody/PlayerSprite")
+player_body = NodePath("PlayerBody")
+
+[node name="PlayerBody" type="RigidBody2D" parent="." unique_id=269320688]
+position = Vector2(565, 340)
+linear_damp = 4.0
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerBody" unique_id=1814180966]
+position = Vector2(0, -0.99999994)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_qfcom")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody" unique_id=1063159351]
+shape = SubResource("CircleShape2D_fe37d")
