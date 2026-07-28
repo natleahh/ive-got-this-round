@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bal12xdn2jwtj"]
+
+[ext_resource type="Script" uid="uid://lxu11ynus76s" path="res://src/Systems/GlassController/GravityField/gravity_field.gd" id="1_6pln7"]
+
+[node name="GravityField" type="Area2D" unique_id=335901992 node_paths=PackedStringArray("collision_shape_2d")]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+script = ExtResource("1_6pln7")
+collision_shape_2d = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=662725536]
+debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
