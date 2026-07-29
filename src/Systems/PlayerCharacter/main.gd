@@ -1,31 +1,42 @@
-extends Node2D
+extends RigidBody2D
 
 var facing_direction: Vector2
-var is_moving: bool
+
 
 @export var base_speed: float = 1.0 * (2 ** 10)
-
-var _current_speed: float
-@export var current_speed: float:
-	set(value):
-		_current_speed = current_speed * (1 if is_moving else 2)
+	
+var screen_position: Vector2:
 	get:
-		return _current_speed
+		return get_global_transform_with_canvas() * position
+		
 
 @export var player_sprite: Sprite2D
-@export var player_body: RigidBody2D
+@export var movement_state_machine: MovementStateMachine
+@export var initial_state: MovementState
+
+@onready var current_state: MovementState = initial_state
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-			facing_direction = player_body.global_position.direction_to(
-				event.global_position
+			facing_direction = screen_position.direction_to(
+				event.position
 			)
-	if event is InputEventMouseButton:
-			is_moving = event.button_index == MouseButton.MOUSE_BUTTON_LEFT
+			#print(event.position)
+	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		var new_state: Variant
+		if event.is_released():
+			new_state = "Idle"
+		else:
+			new_state = "Walk"
+		movement_state_machine.change_state(new_state)
+		
 
 func _process(delta: float) -> void:
 	player_sprite.rotation = facing_direction.angle()
 
 func _physics_process(delta: float) -> void:
-	current_speed = base_speed
-	player_body.apply_central_force(facing_direction * current_speed)
+	apply_central_force(facing_direction * current_state.transform * base_speed)
+
+
+func _on_movement_state_machine_changed_state(new: MovementState) -> void:
+	current_state = new
