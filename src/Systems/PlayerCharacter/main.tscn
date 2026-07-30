@@ -3,14 +3,48 @@
 [ext_resource type="Script" uid="uid://cimfxolatyu70" path="res://src/Systems/PlayerCharacter/main.gd" id="1_fe37d"]
 [ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/assets/compass-rose.png" id="1_qfcom"]
 [ext_resource type="Script" uid="uid://habioyc54ky6" path="res://src/Systems/PlayerCharacter/MovementState/main.gd" id="3_qpwx2"]
-[ext_resource type="Script" uid="uid://bmjwc7ysttwpc" path="res://src/Systems/PlayerCharacter/MovementState/States/Idle/Idle.gd" id="4_7hsk4"]
-[ext_resource type="Resource" uid="uid://b6nbxqlcu6l6l" path="res://src/Systems/PlayerCharacter/MovementState/States/Idle/Idle.tres" id="5_k08ke"]
-[ext_resource type="Script" uid="uid://57spxqus0o44" path="res://src/Systems/PlayerCharacter/MovementState/States/Walk/Walk.gd" id="6_rhywn"]
+[ext_resource type="Script" uid="uid://bmjwc7ysttwpc" path="res://src/Systems/PlayerCharacter/MovementState/States/Basic.gd" id="4_7hsk4"]
 [ext_resource type="Script" uid="uid://48py71d3vlu" path="res://src/Systems/PlayerCharacter/PlayerInput/main.gd" id="7_6dw6j"]
-[ext_resource type="Resource" uid="uid://bpd333kbrbhc6" path="res://src/Systems/PlayerCharacter/MovementState/States/Walk/Walk.tres" id="7_ht4mm"]
+[ext_resource type="Script" uid="uid://2to43vfl74mb" path="res://src/Systems/PlayerCharacter/MovementState/States/Dash.gd" id="7_idld2"]
+[ext_resource type="Script" uid="uid://b6n02q4b2bvbt" path="res://src/Systems/PlayerCharacter/MovementState/movement_parameters.gd" id="8_agadg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fe37d"]
 radius = 21.095022
+
+[sub_resource type="Resource" id="Resource_agadg"]
+script = ExtResource("8_agadg")
+speed = 0.0
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
+
+[sub_resource type="Resource" id="Resource_idld2"]
+script = ExtResource("8_agadg")
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
+
+[sub_resource type="Resource" id="Resource_ht4mm"]
+script = ExtResource("8_agadg")
+speed = 10.0
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
+
+[sub_resource type="Resource" id="Resource_5wm7s"]
+script = ExtResource("8_agadg")
+direction = 2
+rotation = 3.141592653589793
+speed = 10.0
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
+
+[sub_resource type="Resource" id="Resource_6dw6j"]
+script = ExtResource("8_agadg")
+direction = 3
+rotation = 4.71238898038469
+speed = 10.0
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
+
+[sub_resource type="Resource" id="Resource_p8lhk"]
+script = ExtResource("8_agadg")
+direction = 1
+rotation = 1.5707963267948966
+speed = 10.0
+metadata/_custom_type_script = "uid://b6n02q4b2bvbt"
 
 [node name="Main" type="RigidBody2D" unique_id=269320688 node_paths=PackedStringArray("player_sprite", "movement_state_machine", "player_input")]
 linear_damp = 4.0
@@ -30,13 +64,33 @@ metadata/_custom_type_script = "uid://habioyc54ky6"
 
 [node name="Idle" type="Node" parent="MovementStateMachine" unique_id=811419062]
 script = ExtResource("4_7hsk4")
-parameters = ExtResource("5_k08ke")
+parameters = SubResource("Resource_agadg")
 metadata/_custom_type_script = "uid://bmjwc7ysttwpc"
 
-[node name="Walk" type="Node" parent="MovementStateMachine" unique_id=1243319314]
-script = ExtResource("6_rhywn")
-parameters = ExtResource("7_ht4mm")
-metadata/_custom_type_script = "uid://57spxqus0o44"
+[node name="Walk" type="Node" parent="MovementStateMachine" unique_id=2144519751]
+script = ExtResource("4_7hsk4")
+parameters = SubResource("Resource_idld2")
+metadata/_custom_type_script = "uid://bmjwc7ysttwpc"
+
+[node name="F_Dash" type="Node" parent="MovementStateMachine" unique_id=410158614]
+script = ExtResource("7_idld2")
+parameters = SubResource("Resource_ht4mm")
+metadata/_custom_type_script = "uid://2to43vfl74mb"
+
+[node name="B_Dash" type="Node" parent="MovementStateMachine" unique_id=2014502578]
+script = ExtResource("7_idld2")
+parameters = SubResource("Resource_5wm7s")
+metadata/_custom_type_script = "uid://2to43vfl74mb"
+
+[node name="L_Dash" type="Node" parent="MovementStateMachine" unique_id=1649247202]
+script = ExtResource("7_idld2")
+parameters = SubResource("Resource_6dw6j")
+metadata/_custom_type_script = "uid://2to43vfl74mb"
+
+[node name="R_Dash" type="Node" parent="MovementStateMachine" unique_id=2037257794]
+script = ExtResource("7_idld2")
+parameters = SubResource("Resource_p8lhk")
+metadata/_custom_type_script = "uid://2to43vfl74mb"
 
 [node name="PlayerInput" type="Node2D" parent="." unique_id=1271126108]
 script = ExtResource("7_6dw6j")

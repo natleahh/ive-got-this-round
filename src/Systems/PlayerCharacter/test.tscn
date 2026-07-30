@@ -7,7 +7,8 @@
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=546692289]
 position = Vector2(50.00009, 36.99997)
-scale = Vector2(10.2265625, 9.359375)
+scale = Vector2(200, 183.025)
 texture = ExtResource("1_xcbb3")
 
 [node name="Main" parent="." unique_id=269320688 instance=ExtResource("2_gbdmv")]
+mass = 2.0

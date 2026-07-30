@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="MovementParamters" format=3 uid="uid://b6nbxqlcu6l6l"]
-
-[ext_resource type="Script" uid="uid://b6n02q4b2bvbt" path="res://src/Systems/PlayerCharacter/MovementState/movement_parameters.gd" id="1_j6bt7"]
-
-[resource]
-script = ExtResource("1_j6bt7")
-relative_speed = 0.0
-metadata/_custom_type_script = "uid://b6n02q4b2bvbt"

@@ -1,17 +1,22 @@
 @abstract
 class_name MovementState extends Node
-	
-signal exited
+
+## Emitted when a state should immediately exit to an state
+@warning_ignore("unused_signal")
+signal exited(state_name: String)
 
 @export var parameters: MovementParamters
 """Common Paramters all Movement States should define."""
 
-@onready var transform: Transform2D:
-	get:
-		return parameters._tranform
+## Checks if state can be entered and returns the next state
+@abstract
+func enter(old_state: MovementState) -> MovementState
 
-func enter(old_state: MovementState) -> MovementState:
-	return self
+## Checks if state can be exited and returns the next state
+@abstract
+func exit(new_state: MovementState) -> MovementState
 
-func exit(new_state: MovementState) -> void:
-	exited.emit(new_state)
+## Returns the force of a state based on its movement paramters
+func get_force(speed: float, rotation: float) -> Vector2:
+	return speed * parameters.speed * Vector2.RIGHT.rotated(rotation + parameters.rotation)
+	

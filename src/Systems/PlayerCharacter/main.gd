@@ -1,8 +1,7 @@
 extends RigidBody2D
 
-@export var base_speed: float = 1.0 * (2 ** 10)
+@export var base_speed: float = 1.0 * (2 ** 12)
 
-var facing_direction: Vector2
 var current_state: MovementState
 
 @export var player_sprite: Sprite2D
@@ -11,13 +10,14 @@ var current_state: MovementState
 
 func _process(_delta: float) -> void:
 	player_sprite.rotation = player_input.rotation
-	facing_direction = Vector2.from_angle(player_input.rotation)
 
 func _physics_process(_delta: float) -> void:
-	apply_central_force(facing_direction * current_state.transform * base_speed)
+	var force = current_state.get_force(base_speed, player_input.rotation)
+	apply_central_force(force)
 
 func _on_movement_state_machine_changed_state(new: MovementState) -> void:
 	current_state = new
+	print(new)
 
 func _on_player_input_action_changed(state_name: String) -> void:
 	movement_state_machine.change_state(state_name)

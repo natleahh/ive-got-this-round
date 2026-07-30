@@ -21,11 +21,11 @@ func _ready() -> void:
 		StateMap[child.name] = child
 	changed_state.emit(initial_state)
 
-func change_state(new_state) -> void:
-	current_state.exit(StateMap[new_state])
+func change_state(new_state: String) -> void:
+	current_state = current_state.exit(StateMap[new_state])
 
-func _on_exit(new_state: MovementState) -> void:
-	current_state = new_state.enter(new_state)
+func _on_exit(new_state: String) -> void:
+	current_state = current_state.enter(StateMap[new_state])
 	
 	
 	
