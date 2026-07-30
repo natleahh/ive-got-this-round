@@ -1,35 +1,27 @@
 [gd_scene format=3 uid="uid://dqh42ce2gyiok"]
 
 [ext_resource type="Script" uid="uid://cimfxolatyu70" path="res://src/Systems/PlayerCharacter/main.gd" id="1_fe37d"]
-[ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/compass-rose.png" id="1_qfcom"]
+[ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/assets/compass-rose.png" id="1_qfcom"]
 [ext_resource type="Script" uid="uid://habioyc54ky6" path="res://src/Systems/PlayerCharacter/MovementState/main.gd" id="3_qpwx2"]
 [ext_resource type="Script" uid="uid://bmjwc7ysttwpc" path="res://src/Systems/PlayerCharacter/MovementState/States/Idle/Idle.gd" id="4_7hsk4"]
 [ext_resource type="Resource" uid="uid://b6nbxqlcu6l6l" path="res://src/Systems/PlayerCharacter/MovementState/States/Idle/Idle.tres" id="5_k08ke"]
 [ext_resource type="Script" uid="uid://57spxqus0o44" path="res://src/Systems/PlayerCharacter/MovementState/States/Walk/Walk.gd" id="6_rhywn"]
+[ext_resource type="Script" uid="uid://48py71d3vlu" path="res://src/Systems/PlayerCharacter/PlayerInput/main.gd" id="7_6dw6j"]
 [ext_resource type="Resource" uid="uid://bpd333kbrbhc6" path="res://src/Systems/PlayerCharacter/MovementState/States/Walk/Walk.tres" id="7_ht4mm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fe37d"]
 radius = 21.095022
 
-[node name="Main" type="RigidBody2D" unique_id=269320688 node_paths=PackedStringArray("player_sprite", "movement_state_machine", "initial_state")]
+[node name="Main" type="RigidBody2D" unique_id=269320688 node_paths=PackedStringArray("player_sprite", "movement_state_machine", "player_input")]
 linear_damp = 4.0
 script = ExtResource("1_fe37d")
 player_sprite = NodePath("PlayerSprite")
 movement_state_machine = NodePath("MovementStateMachine")
-initial_state = NodePath("MovementStateMachine/Idle")
+player_input = NodePath("PlayerInput")
 metadata/_edit_group_ = true
-
-[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1814180966]
-position = Vector2(0, -0.99999994)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_qfcom")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1063159351]
 shape = SubResource("CircleShape2D_fe37d")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=705438819]
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=1994654640 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_qpwx2")
@@ -46,4 +38,18 @@ script = ExtResource("6_rhywn")
 parameters = ExtResource("7_ht4mm")
 metadata/_custom_type_script = "uid://57spxqus0o44"
 
+[node name="PlayerInput" type="Node2D" parent="." unique_id=1271126108]
+script = ExtResource("7_6dw6j")
+metadata/_custom_type_script = "uid://48py71d3vlu"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=705438819]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1836413784]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_qfcom")
+offset = Vector2(0, -10)
+
 [connection signal="changed_state" from="MovementStateMachine" to="." method="_on_movement_state_machine_changed_state"]
+[connection signal="action_changed" from="PlayerInput" to="." method="_on_player_input_action_changed"]

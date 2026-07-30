@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://1jbqd0ts16w"]
+
+[ext_resource type="Texture2D" uid="uid://bp0amguw0k7hr" path="res://icon.svg" id="1_dsnma"]
+[ext_resource type="Script" uid="uid://48py71d3vlu" path="res://src/Systems/PlayerCharacter/PlayerInput/main.gd" id="1_ikenn"]
+[ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/assets/compass-rose.png" id="2_m8afs"]
+
+[node name="Test" type="Node2D" unique_id=739936213]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=384847526]
+scale = Vector2(50, 50)
+texture = ExtResource("1_dsnma")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1650812215]
+
+[node name="PlayerInput" type="Node2D" parent="Node2D" unique_id=850208448]
+script = ExtResource("1_ikenn")
+metadata/_custom_type_script = "uid://48py71d3vlu"
+
+[node name="PlayerSprite" type="Sprite2D" parent="Node2D/PlayerInput" unique_id=1484908054]
+position = Vector2(0, -0.99999994)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_m8afs")
+
+[node name="Camera2D" type="Camera2D" parent="Node2D" unique_id=1143338214]
