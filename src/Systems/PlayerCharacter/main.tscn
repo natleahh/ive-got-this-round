@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/assets/compass-rose.png" id="1_qfcom"]
 [ext_resource type="Script" uid="uid://habioyc54ky6" path="res://src/Systems/PlayerCharacter/MovementState/main.gd" id="3_qpwx2"]
 [ext_resource type="Script" uid="uid://bmjwc7ysttwpc" path="res://src/Systems/PlayerCharacter/MovementState/States/Basic.gd" id="4_7hsk4"]
-[ext_resource type="Script" uid="uid://48py71d3vlu" path="res://src/Systems/PlayerCharacter/PlayerInput/main.gd" id="7_6dw6j"]
+[ext_resource type="Script" uid="uid://48py71d3vlu" path="res://src/Systems/PlayerCharacter/PlayerInput/main.gd" id="7_agadg"]
 [ext_resource type="Script" uid="uid://2to43vfl74mb" path="res://src/Systems/PlayerCharacter/MovementState/States/Dash.gd" id="7_idld2"]
 [ext_resource type="Script" uid="uid://b6n02q4b2bvbt" path="res://src/Systems/PlayerCharacter/MovementState/movement_parameters.gd" id="8_agadg"]
 
@@ -93,7 +93,7 @@ parameters = SubResource("Resource_p8lhk")
 metadata/_custom_type_script = "uid://2to43vfl74mb"
 
 [node name="PlayerInput" type="Node2D" parent="." unique_id=1271126108]
-script = ExtResource("7_6dw6j")
+script = ExtResource("7_agadg")
 metadata/_custom_type_script = "uid://48py71d3vlu"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=705438819]

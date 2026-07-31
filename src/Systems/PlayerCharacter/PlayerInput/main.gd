@@ -9,14 +9,16 @@ var action: String = "Idle":
 		action = val
 		action_changed.emit(val)
 
+var mouse_world_position
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		handle_mouse_motion(event)
 	if event is InputEventMouseButton:
 		handle_mouse_button(event)
-		
+
 func handle_mouse_motion(event: InputEventMouseMotion) -> void:
-	var mouse_world_position = event.position * get_canvas_transform()
+	mouse_world_position = event.position * get_canvas_transform()
 	look_at(mouse_world_position)
 
 func handle_mouse_button(event: InputEventMouseButton) -> void:
