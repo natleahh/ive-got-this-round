@@ -45,4 +45,4 @@ func handle_key_input() -> void:
 			action = "R_Dash"
 		
 func _get_absolute_dash(input_dash: Vector2) -> Vector2:
-	return input_dash.rotated(rotation).round()
+	return input_dash.rotated(-rotation).round()
