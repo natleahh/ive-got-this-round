@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cf8favaumpf3e"]
+
+[ext_resource type="Script" uid="uid://q1abwqpfkctt" path="res://src/Systems/GlassSimulation/main.gd" id="1_kijy7"]
+[ext_resource type="Script" uid="uid://lxu11ynus76s" path="res://src/Systems/GlassSimulation/GravityField/gravity_field.gd" id="2_opr1y"]
+[ext_resource type="Script" uid="uid://bts2jetoouwi" path="res://src/Systems/GlassSimulation/GlassWobbler/main.gd" id="3_kijy7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vvgl"]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vin7i"]
+radius = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dv53g"]
+radius = 50.0
+
+[node name="Main" type="Node2D" unique_id=205577368 node_paths=PackedStringArray("glass_wobbler", "inner_field", "middle_field", "outer_field")]
+script = ExtResource("1_kijy7")
+glass_wobbler = NodePath("GlassWobbler")
+inner_field = NodePath("InnerField")
+middle_field = NodePath("MiddleField")
+outer_field = NodePath("OuterField")
+
+[node name="OuterField" type="Area2D" parent="." unique_id=1177404323]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = -245.0
+script = ExtResource("2_opr1y")
+shape = SubResource("CircleShape2D_2vvgl")
+debug_color = Color(0.90092397, 0.3072989, 0.12979418, 0.41960785)
+relative_gravity = -0.25
+metadata/_custom_type_script = "uid://lxu11ynus76s"
+
+[node name="MiddleField" type="Area2D" parent="." unique_id=978939087]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 245.0
+linear_damp_space_override = 3
+linear_damp = 0.8
+script = ExtResource("2_opr1y")
+shape = SubResource("CircleShape2D_vin7i")
+debug_color = Color(0.6595672, 0.515148, 0.014255365, 0.41960785)
+relative_gravity = 0.25
+metadata/_custom_type_script = "uid://lxu11ynus76s"
+
+[node name="InnerField" type="Area2D" parent="." unique_id=2101996216]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+script = ExtResource("2_opr1y")
+shape = SubResource("CircleShape2D_dv53g")
+debug_color = Color(0.26111186, 0.63432205, 1.92523e-07, 0.41960785)
+relative_gravity = 1.0
+metadata/_custom_type_script = "uid://lxu11ynus76s"
+
+[node name="GlassWobbler" type="RigidBody2D" parent="." unique_id=777085246]
+linear_damp_mode = 1
+linear_damp = 20.0
+script = ExtResource("3_kijy7")
+metadata/_custom_type_script = "uid://bts2jetoouwi"
+
+[node name="RotatingCamera" type="Camera2D" parent="." unique_id=2119758429]
+
+[connection signal="body_exited" from="OuterField" to="." method="_on_outer_field_body_exited"]
