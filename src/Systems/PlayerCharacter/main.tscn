@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dqh42ce2gyiok"]
+[gd_scene format=3 uid="uid://bier2ygleall"]
 
 [ext_resource type="Script" uid="uid://cimfxolatyu70" path="res://src/Systems/PlayerCharacter/main.gd" id="1_fe37d"]
 [ext_resource type="Texture2D" uid="uid://dwmu0rxnofstw" path="res://src/Systems/PlayerCharacter/assets/compass-rose.png" id="1_qfcom"]
