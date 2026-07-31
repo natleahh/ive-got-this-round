@@ -25,7 +25,7 @@ func change_state(new_state: String) -> void:
 	current_state = current_state.exit(StateMap[new_state])
 
 func _on_exit(new_state: String) -> void:
-	current_state = current_state.enter(StateMap[new_state])
+	current_state = StateMap[new_state].enter(current_state)
 	
 	
 	
