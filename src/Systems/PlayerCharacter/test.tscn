@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cnehku5dwahc5"]
+
+[ext_resource type="Texture2D" uid="uid://bp0amguw0k7hr" path="res://icon.svg" id="1_xcbb3"]
+[ext_resource type="PackedScene" uid="uid://dqh42ce2gyiok" path="res://src/Systems/PlayerCharacter/main.tscn" id="2_gbdmv"]
+
+[node name="Test" type="Node2D" unique_id=518846399]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=546692289]
+position = Vector2(50.00009, 36.99997)
+scale = Vector2(200, 183.025)
+texture = ExtResource("1_xcbb3")
+
+[node name="Main" parent="." unique_id=269320688 instance=ExtResource("2_gbdmv")]
+mass = 2.0
