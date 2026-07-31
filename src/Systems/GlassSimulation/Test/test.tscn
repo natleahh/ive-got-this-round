@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://jkevt22pgmj6"]
+
+[ext_resource type="Script" uid="uid://hjctrm15rfea" path="res://src/Systems/GlassSimulation/Test/test.gd" id="1_b7gpj"]
+[ext_resource type="PackedScene" uid="uid://cf8favaumpf3e" path="res://src/Systems/GlassSimulation/main.tscn" id="1_o2h86"]
+
+[node name="Test" type="Node2D" unique_id=920049114 node_paths=PackedStringArray("main")]
+script = ExtResource("1_b7gpj")
+main = NodePath("Main")
+
+[node name="Main" parent="." unique_id=205577368 instance=ExtResource("1_o2h86")]
