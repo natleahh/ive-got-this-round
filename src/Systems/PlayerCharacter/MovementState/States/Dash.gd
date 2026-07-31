@@ -4,34 +4,26 @@ class_name Dash extends MovementState
 @export_range(0, 5000, 1, "exp") var cooldown: float = 500
 @export_range(0, 5000, 1, "exp") var dashtime: float = 250
 
-@onready var cooldown_timer: Timer = _setup_timer()
-@onready var dashtime_timer: Timer = _setup_timer()
+@onready var cooldown_timer: CooldownTimer = CooldownTimer.cons(cooldown, self)
+@onready var dashtime_timer: CooldownTimer = CooldownTimer.cons(dashtime, self)
 
 var _just_dashed: bool = false
 var constant_force: Vector2
 
 func _ready() -> void:
-	cooldown_timer.wait_time = cooldown / 1000.0
-	dashtime_timer.wait_time = dashtime / 1000.0
 	dashtime_timer.timeout.connect(_on_dashtime_timeout)
 
-
-func _setup_timer() -> Timer:
-	var timer = Timer.new()
-	add_child(timer)
-	return timer
-	
 func enter(old_state: MovementState) -> MovementState:
-	if cooldown_timer.wait_time > 0:
+	if not cooldown_timer.is_stopped():
 		return old_state
 	if dashtime_timer.is_stopped():
 		_just_dashed = true
-		dashtime_timer.start(dashtime)
+		dashtime_timer.start()
 	return self
 
 func exit(_new_state: MovementState) -> MovementState:
 	if dashtime_timer.is_stopped():
-		cooldown_timer.start(cooldown)
+		cooldown_timer.start()
 	return self
 
 func get_force(speed: float, rotation: float) -> Vector2:
@@ -45,4 +37,3 @@ func _on_dashtime_timeout():
 		exited.emit("Walk")
 	else:
 		exited.emit("Idle")
-		
